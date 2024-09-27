@@ -50,7 +50,7 @@
         <div class="profile-pic"></div>
         <div class="info">
             <div>{{$nama}}</div>
-            <div>{{$kelas}}</div>
+            <div>Kelas: {{ $nama_kelas ?? 'Kelas Tidak Ditemukan' }}</div> 
             <div>{{$npm}}</div>
         </div>
     </div>

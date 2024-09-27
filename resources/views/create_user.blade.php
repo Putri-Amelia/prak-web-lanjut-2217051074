@@ -40,7 +40,7 @@
             font-weight: 600;
         }
 
-        .input-field {
+        .input-field, .select-field {
             width: 100%;
             padding: 15px;
             margin: 10px 0;
@@ -51,7 +51,7 @@
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .input-field:focus {
+        .input-field:focus, .select-field:focus {
             outline: none;
             border-color: #f080a0;
         }
@@ -97,15 +97,30 @@
             @csrf
             <div class="form-group">
                 <label for="nama">Nama :</label>
-                <input class="input-field" type="text" name="nama" placeholder="Masukkan Nama">
+                <input class="input-field @error('nama') is-invalid @enderror" type="text" name="nama" placeholder="Masukkan Nama" value="{{ old('nama') }}">
+                @error('nama')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="npm">NPM :</label>
-                <input class="input-field" type="text" name="npm" placeholder="Masukkan NPM">
+                <input class="input-field @error('npm') is-invalid @enderror" type="text" name="npm" placeholder="Masukkan NPM" value="{{ old('npm') }}">
+                @error('npm')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group">
-                <label for="kelas">Kelas :</label>
-                <input class="input-field" type="text" name="kelas" placeholder="Masukkan Kelas">
+                <label for="kelas_id">Kelas :</label>
+                <select name="kelas_id" class="select-field @error('kelas_id') is-invalid @enderror">
+                    @foreach($kelas as $kelasItem)
+                        <option value="{{ $kelasItem->id }}" {{ old('kelas_id') == $kelasItem->id ? 'selected' : '' }}>
+                            {{ $kelasItem->nama_kelas }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('kelas_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <button class="submit-btn" type="submit">Submit</button>
         </form>
