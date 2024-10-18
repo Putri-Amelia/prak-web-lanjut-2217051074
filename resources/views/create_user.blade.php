@@ -90,7 +90,7 @@
 
 <div class="form-container">
     <h2>Form Data</h2>
-    <form action="{{ route('user.store')}}" method="POST">
+    <form action="{{ route('user.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="nama">Nama :</label>
@@ -118,6 +118,10 @@
             @error('kelas_id')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
+        </div>
+        <div>
+            <label for="foto">Foto : </label><br>
+            <input type="file" id="foto" name="foto"><br><br>
         </div>
         <button class="submit-btn" type="submit">Submit</button>
     </form>
