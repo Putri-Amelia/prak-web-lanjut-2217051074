@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tugas 3</title>
+@extends('layouts.app')
+
+@section('content')
     <style>
         body {
             background-image: url('/assets/img/bg.jpg');
@@ -89,41 +86,40 @@
         }
 
     </style>
-</head>
-<body>
-    <div class="form-container">
-        <h2>Form Data</h2>
-        <form action="{{ route('user.store')}}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="nama">Nama :</label>
-                <input class="input-field @error('nama') is-invalid @enderror" type="text" name="nama" placeholder="Masukkan Nama" value="{{ old('nama') }}">
-                @error('nama')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="npm">NPM :</label>
-                <input class="input-field @error('npm') is-invalid @enderror" type="text" name="npm" placeholder="Masukkan NPM" value="{{ old('npm') }}">
-                @error('npm')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="kelas_id">Kelas :</label>
-                <select name="kelas_id" class="select-field @error('kelas_id') is-invalid @enderror">
-                    @foreach($kelas as $kelasItem)
-                        <option value="{{ $kelasItem->id }}" {{ old('kelas_id') == $kelasItem->id ? 'selected' : '' }}>
-                            {{ $kelasItem->nama_kelas }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('kelas_id')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div>
-            <button class="submit-btn" type="submit">Submit</button>
-        </form>
-    </div>
-</body>
-</html>
+
+
+<div class="form-container">
+    <h2>Form Data</h2>
+    <form action="{{ route('user.store')}}" method="POST">
+        @csrf
+        <div class="form-group">
+            <label for="nama">Nama :</label>
+            <input class="input-field @error('nama') is-invalid @enderror" type="text" name="nama" placeholder="Masukkan Nama" value="{{ old('nama') }}">
+            @error('nama')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="npm">NPM :</label>
+            <input class="input-field @error('npm') is-invalid @enderror" type="text" name="npm" placeholder="Masukkan NPM" value="{{ old('npm') }}">
+            @error('npm')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="kelas_id">Kelas :</label>
+            <select name="kelas_id" class="select-field @error('kelas_id') is-invalid @enderror">
+                @foreach($kelas as $kelasItem)
+                    <option value="{{ $kelasItem->id }}" {{ old('kelas_id') == $kelasItem->id ? 'selected' : '' }}>
+                        {{ $kelasItem->nama_kelas }}
+                    </option>
+                @endforeach
+            </select>
+            @error('kelas_id')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <button class="submit-btn" type="submit">Submit</button>
+    </form>
+</div>
+@endsection
